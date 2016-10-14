@@ -11,12 +11,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/view_pager"
-        android:layout_above="@+id/bottomBar">
+        android:layout_above="@+id/bottom_navigation_bar">
     </android.support.v4.view.ViewPager>
-    <com.roughike.bottombar.BottomBar
-        android:id="@+id/bottomBar"
+    <com.aaronxu.friendapartment.view.ViewPagerIndicator
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="53dp"
+        android:id="@+id/bottom_navigation_bar"
+        android:background="#ffffff"
         android:layout_alignParentBottom="true"
-        app:bb_tabXmlResource="@xml/bottombar_tabs" />
+        android:orientation="horizontal"
+
+        android:gravity="center"
+        android:elevation="2dp"
+        >
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/main_bottom"/>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/find_bottom"/>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/my_bottom"/>
+    </com.aaronxu.friendapartment.view.ViewPagerIndicator>
 </RelativeLayout>

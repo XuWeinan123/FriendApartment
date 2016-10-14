@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">友寓</string>
     <string name="menu_locate">定位</string>
+    <string name="menu_search">搜索</string>
 </resources>

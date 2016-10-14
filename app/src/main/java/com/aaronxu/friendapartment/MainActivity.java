@@ -1,18 +1,21 @@
 package com.aaronxu.friendapartment;
 
-import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnTabSelectListener;
+import com.aaronxu.friendapartment.fragment.FindFragment;
+import com.aaronxu.friendapartment.fragment.MainFragment;
+import com.aaronxu.friendapartment.fragment.MyFragment;
+import com.aaronxu.friendapartment.view.ViewPagerIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,42 +26,61 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
     private List<Fragment> fragmentList;
-    private BottomBar mBottomBar;
+    private ViewPagerIndicator mIndicator;
+    private ImageView mImageMain;
+    private ImageView mImageFind;
+    private ImageView mImageMy;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
-        mBottomBar = (BottomBar) findViewById(R.id.bottomBar);
-        
+
         initFragment();
         initMainViewPager();
         initBottomBarListener();
 
-    }
-
-    private void initBottomBarListener() {
-        mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onTabSelected(@IdRes int tabId) {
-                if(tabId == R.id.tab_main){
-                    Toast.makeText(getApplicationContext(),"跳转到了主页",Toast.LENGTH_SHORT).show();
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                for(int i=0;i<3;i++){
+                    mIndicator.getChildView(i).setColorFilter(ContextCompat.getColor(getBaseContext(),R.color.orginGrayColor));
                 }
-                if(tabId == R.id.tab_find){
-                    Toast.makeText(getApplicationContext(),"跳转到了发现",Toast.LENGTH_SHORT).show();
-                }
-                if(tabId == R.id.tab_my){
-                    Toast.makeText(getApplicationContext(),"跳转到了个人设置",Toast.LENGTH_SHORT).show();
-                }
+                mIndicator.getChildView(position).setColorFilter(ContextCompat.getColor(getBaseContext(),R.color.colorPrimary));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
     }
 
+    private void initBottomBarListener() {
+        mIndicator = (ViewPagerIndicator) findViewById(R.id.bottom_navigation_bar);
+        mIndicator.setmViewPager(mViewPager);
+        mIndicator.setItemClickEvent();
+        mImageMain = mIndicator.getChildView(0);
+        mImageFind = mIndicator.getChildView(1);
+        mImageMy = mIndicator.getChildView(2);
+
+    }
+
     private void initFragment() {
         fragmentList = new ArrayList<>();
-        Fragment fragment1 = MainFragment.newInstance("首页");
+        MainFragment fragment1 = MainFragment.newInstance("首页");
+        FindFragment fragment2 = FindFragment.newInstance("发现");
+        MyFragment fragment3 = MyFragment.newInstance("个人");
         fragmentList.add(fragment1);
+        fragmentList.add(fragment2);
+        fragmentList.add(fragment3);
         Log.d(TAG, "initFragment: ");
     }
 
