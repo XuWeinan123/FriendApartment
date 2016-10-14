@@ -1,21 +1,18 @@
 package com.aaronxu.friendapartment;
 
-import android.graphics.Color;
+import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.jude.rollviewpager.RollPagerView;
-import com.jude.rollviewpager.adapter.StaticPagerAdapter;
-import com.jude.rollviewpager.hintview.ColorPointHintView;
-import com.jude.rollviewpager.hintview.IconHintView;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,15 +23,36 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
     private List<Fragment> fragmentList;
+    private BottomBar mBottomBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
+        mBottomBar = (BottomBar) findViewById(R.id.bottomBar);
+        
         initFragment();
         initMainViewPager();
+        initBottomBarListener();
 
+    }
+
+    private void initBottomBarListener() {
+        mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(@IdRes int tabId) {
+                if(tabId == R.id.tab_main){
+                    Toast.makeText(getApplicationContext(),"跳转到了主页",Toast.LENGTH_SHORT).show();
+                }
+                if(tabId == R.id.tab_find){
+                    Toast.makeText(getApplicationContext(),"跳转到了发现",Toast.LENGTH_SHORT).show();
+                }
+                if(tabId == R.id.tab_my){
+                    Toast.makeText(getApplicationContext(),"跳转到了个人设置",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void initFragment() {
@@ -64,6 +82,11 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setAdapter(mAdapter);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 
     public void firstClick(View v){
         Toast.makeText(this,"到南昌",Toast.LENGTH_SHORT).show();
