@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.aaronxu.friendapartment.fragment.FindFragment;
@@ -36,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mActionBar = getSupportActionBar();
+        mActionBar.setTitle("首页");
 
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
 
