@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,15 +27,15 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
     private List<Fragment> fragmentList;
+    private List<String> titleList;
     private ViewPagerIndicator mIndicator;
-    private ImageView mImageMain;
-    private ImageView mImageFind;
-    private ImageView mImageMy;
+    private ActionBar mActionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mActionBar = getSupportActionBar();
 
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
 
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         initMainViewPager();
         initBottomBarListener();
 
+        mIndicator.getChildView(0).setColorFilter(ContextCompat.getColor(getBaseContext(),R.color.colorPrimary));
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -54,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
                     mIndicator.getChildView(i).setColorFilter(ContextCompat.getColor(getBaseContext(),R.color.orginGrayColor));
                 }
                 mIndicator.getChildView(position).setColorFilter(ContextCompat.getColor(getBaseContext(),R.color.colorPrimary));
+
+                mActionBar.setTitle(mViewPager.getAdapter().getPageTitle(position));
             }
 
             @Override
@@ -67,9 +71,6 @@ public class MainActivity extends AppCompatActivity {
         mIndicator = (ViewPagerIndicator) findViewById(R.id.bottom_navigation_bar);
         mIndicator.setmViewPager(mViewPager);
         mIndicator.setItemClickEvent();
-        mImageMain = mIndicator.getChildView(0);
-        mImageFind = mIndicator.getChildView(1);
-        mImageMy = mIndicator.getChildView(2);
 
     }
 
