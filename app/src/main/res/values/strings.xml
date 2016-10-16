@@ -2,4 +2,12 @@
     <string name="app_name">友寓</string>
     <string name="menu_locate">定位</string>
     <string name="menu_search">搜索</string>
+    <string name="setting_myself">个人中心</string>
+    <string name="setting_message">消息</string>
+    <string name="setting_collect">我的收藏</string>
+    <string name="setting_history">浏览历史</string>
+    <string name="setting_invive">邀请好友</string>
+    <string name="setting_switch">切换模式</string>
+    <string name="setting_setting">设置</string>
+    <string name="setting_turnoff">退出</string>
 </resources>

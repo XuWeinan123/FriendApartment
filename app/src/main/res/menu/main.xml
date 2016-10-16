@@ -5,7 +5,8 @@
         android:id="@+id/menu_locate2"
         android:title="@string/menu_search"
         android:icon="@mipmap/search_in_bar"
-        app:showAsAction="always"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="collapseActionView|ifRoom"
         />
     <item
         android:id="@+id/menu_locate"

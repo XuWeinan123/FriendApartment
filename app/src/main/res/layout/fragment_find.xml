@@ -3,22 +3,68 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#f3f3f3">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="36dp"
         android:background="#ffffff"
         android:elevation="2dp"
         android:visibility="gone"
         android:id="@+id/linearLayout"
-        android:orientation="horizontal"></LinearLayout>
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="综合排序"
+                android:textSize="13sp"
+                android:textColor="@color/textNoneBlack"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="最多人要"
+                android:textSize="13sp"
+                android:textColor="@color/textRegularBlack"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/multiple_triangle"
+                android:layout_marginStart="6dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="综合排序"
+                android:textSize="13sp"
+                android:textColor="@color/textNoneBlack"/>
+
+        </LinearLayout>
+    </LinearLayout>
 
     <ListView
+        android:layout_below="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/houseListView"/>
+        android:id="@+id/houseListView"
+        />
 
 </RelativeLayout>

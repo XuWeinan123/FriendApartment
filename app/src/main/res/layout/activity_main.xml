@@ -6,12 +6,12 @@
     android:background="#f3f3f3"
     tools:context="com.aaronxu.friendapartment.MainActivity">
 
-    <android.support.v4.view.ViewPager
+    <com.aaronxu.friendapartment.util.NoScrollViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/view_pager"
         android:layout_above="@+id/bottom_navigation_bar">
-    </android.support.v4.view.ViewPager>
+    </com.aaronxu.friendapartment.util.NoScrollViewPager>
 
     <com.aaronxu.friendapartment.view.ViewPagerIndicator
         android:layout_width="match_parent"
@@ -20,12 +20,11 @@
         android:background="#ffffff"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-
         android:gravity="center"
         android:elevation="2dp"
         >
         <ImageView
-            android:layout_width="0dp"
+             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:src="@mipmap/main_bottom"/>
