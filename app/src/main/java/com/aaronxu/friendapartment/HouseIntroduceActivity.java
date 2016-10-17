@@ -1,17 +1,22 @@
 package com.aaronxu.friendapartment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +34,9 @@ public class HouseIntroduceActivity extends AppCompatActivity {
     private TextView mMasterName;
     private TextView mMapLocation;
     private LinearLayout mMapLocationButton;
+    private CardView mCardView01;
+    private PopupWindow mPopupWindow;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +54,7 @@ public class HouseIntroduceActivity extends AppCompatActivity {
         mMasterName = (TextView) findViewById(R.id.item_master_name);
         mMapLocation = (TextView) findViewById(R.id.item_map_location_text);
         mMapLocationButton = (LinearLayout) findViewById(R.id.item_map_location_button);
+        mCardView01 = (CardView) findViewById(R.id.item_card_view_01);
 
         preInit();
         Log.d(TAG, cardBeanFromFindFragment != null ? cardBeanFromFindFragment.toString() : "对象为空");
@@ -63,6 +72,18 @@ public class HouseIntroduceActivity extends AppCompatActivity {
                 Uri mUri = Uri.parse(cardBeanFromFindFragment.getmMapLocation());
                 Intent mIntent = new Intent(Intent.ACTION_VIEW,mUri);
                 startActivity(mIntent);
+            }
+        });
+        View popupView = getLayoutInflater().inflate(R.layout.card_introduce_roommate, null);
+        mPopupWindow = new PopupWindow(popupView, FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT, true);
+        mPopupWindow.setTouchable(true);
+        mPopupWindow.setOutsideTouchable(true);
+        mPopupWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
+        mCardView01.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(HouseIntroduceActivity.this,"点击了cardView",Toast.LENGTH_SHORT).show();
+                mPopupWindow.showAsDropDown(v);
             }
         });
     }
