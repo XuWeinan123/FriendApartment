@@ -2,76 +2,77 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="112dp"
-    >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#ffffff"
-        android:id="@+id/the_relative">
+        android:layout_height="112dp"
+        >
 
-        <ImageView
-            android:layout_width="128dp"
-            android:layout_height="96dp"
-            android:src="@drawable/test_item_pic"
-            android:id="@+id/item_pic"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="8dp"
-            android:scaleType="fitXY"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="默认名称"
-            android:textSize="14sp"
-            android:textColor="#212121"
-            android:id="@+id/item_name"
-            android:layout_alignTop="@+id/item_pic"
-            android:layout_toRightOf="@+id/item_pic"
-            android:layout_marginLeft="16dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="¥8000/月"
-            android:textSize="14sp"
-            android:textColor="#ff7000"
-            android:id="@+id/item_price"
-            android:layout_alignBottom="@+id/item_pic"
-            android:layout_toRightOf="@+id/item_pic"
-            android:layout_marginLeft="16dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/item_people_wants"
-            android:textSize="8sp"
-            android:text="已经有18个人想要"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="8dp"
-            />
         <RelativeLayout
-            android:layout_width="192dp"
-            android:layout_height="36dp"
-            android:background="@drawable/test_label01"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/item_pic"
-            android:layout_marginLeft="16dp"
-            ></RelativeLayout>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:id="@+id/the_relative">
+
+            <ImageView
+                android:layout_width="128dp"
+                android:layout_height="96dp"
+                android:src="@drawable/test_item_pic"
+                android:id="@+id/item_pic"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:scaleType="fitXY"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="默认名称"
+                android:textSize="14sp"
+                android:textColor="#212121"
+                android:id="@+id/item_name"
+                android:layout_alignTop="@+id/item_pic"
+                android:layout_toRightOf="@+id/item_pic"
+                android:layout_marginLeft="16dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¥8000/月"
+                android:textSize="14sp"
+                android:textColor="#ff7000"
+                android:id="@+id/item_price"
+                android:layout_alignBottom="@+id/item_pic"
+                android:layout_toRightOf="@+id/item_pic"
+                android:layout_marginLeft="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/item_people_wants"
+                android:textSize="8sp"
+                android:text="已经有18个人想要"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                />
+            <RelativeLayout
+                android:layout_width="192dp"
+                android:layout_height="36dp"
+                android:background="@drawable/test_label01"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/item_pic"
+                android:layout_marginLeft="16dp"
+                ></RelativeLayout>
+        </RelativeLayout>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_map_icon"
+            android:background="@mipmap/map_icon_in_item"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"/>
     </RelativeLayout>
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/item_map_icon"
-        android:background="@mipmap/map_icon_in_item"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp"/>
-</RelativeLayout>
 </LinearLayout>
