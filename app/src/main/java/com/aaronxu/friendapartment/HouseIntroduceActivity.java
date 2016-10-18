@@ -109,21 +109,21 @@ public class HouseIntroduceActivity extends AppCompatActivity {
                 break;
             case R.id.menu_collect:
                 if(isCollect) {
-                    item.setIcon(R.mipmap.menu_collect_2);
-                    isCollect = true;
-                }else {
                     item.setIcon(R.mipmap.menu_collect);
                     isCollect = false;
+                }else {
+                    item.setIcon(R.mipmap.menu_collect_2);
+                    isCollect = true;
                 }
                 break;
             case R.id.menu_share:
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "This is my Share text.");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "这是我从我自己写的QQ分享出来的");
                 shareIntent.setType("text/plain");
 
                 //设置分享列表的标题，并且每次都显示分享列表
-                startActivity(Intent.createChooser(shareIntent, "分享到"));
+                startActivity(Intent.createChooser(shareIntent, "分享房屋"));
                 break;
         }
         return super.onOptionsItemSelected(item);
