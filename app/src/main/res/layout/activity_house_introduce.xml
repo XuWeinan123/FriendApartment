@@ -160,10 +160,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:divider="@color/textDividerBlack"
+            android:divider="@drawable/divider"
             android:background="@color/totalWhite"
             android:id="@+id/item_comment_list"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:showDividers="beginning">
             <include layout="@layout/item_comment_content"/>
             <include layout="@layout/item_comment_content"/>
             <include layout="@layout/item_comment_content"/>
