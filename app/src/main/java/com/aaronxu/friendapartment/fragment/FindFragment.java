@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -40,6 +42,9 @@ public class FindFragment extends Fragment{
     private List<CardBean> mList;
     private LinearLayout filter;
     private boolean isFilter;
+    private TranslateAnimation mShowAction;
+    private TranslateAnimation mHiddenAction;
+
     public FindFragment(){
     }
     public static FindFragment newInstance(String title){
@@ -55,6 +60,7 @@ public class FindFragment extends Fragment{
         Log.d(TAG, "FindFragment onCreate: ");
         mContext = getContext();
         initmList();
+        initAnimation();
 
         super.onCreate(savedInstanceState);
     }
@@ -72,7 +78,18 @@ public class FindFragment extends Fragment{
         for (int i = 0;i<20;i++)    mList.add(cardBean);
 
     }
+    private void initAnimation() {
+        mShowAction = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
+                Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
+                -1.0f, Animation.RELATIVE_TO_SELF, 0.0f);
+        mShowAction.setDuration(500);
 
+        mHiddenAction = new TranslateAnimation(Animation.RELATIVE_TO_SELF,
+                0.0f, Animation.RELATIVE_TO_SELF, 0.0f,
+                Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
+                -1.0f);
+        mHiddenAction.setDuration(500);
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -85,10 +102,12 @@ public class FindFragment extends Fragment{
     }
     public void changeFilterVisible(){
         isFilter = true;
+        filter.startAnimation(mShowAction);
         filter.setVisibility(View.VISIBLE);
     }
     public void changeFilterGone(){
         isFilter = false;
+        filter.startAnimation(mHiddenAction);
         filter.setVisibility(View.GONE);
     }
     class HouseAdapter extends BaseAdapter{

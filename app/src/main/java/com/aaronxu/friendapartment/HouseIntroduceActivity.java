@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,10 +31,15 @@ public class HouseIntroduceActivity extends AppCompatActivity {
     private TextView mMasterName;
     private TextView mMapLocation;
     private LinearLayout mMapLocationButton;
+    private ActionBar mActionBar;
+    private boolean isCollect = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house_introduce);
+        mActionBar = getSupportActionBar();
 
         intentFromFragment = getIntent();
         Bundle bundle = intentFromFragment.getExtras();
@@ -53,6 +60,7 @@ public class HouseIntroduceActivity extends AppCompatActivity {
     }
 
     private void init() {
+        mActionBar.setTitle(cardBeanFromFindFragment.getmName());
         mMasterName.setText("雇主："+cardBeanFromFindFragment.getmMasterName());
         String tempForLocation = cardBeanFromFindFragment.getmMapLocation();
         mMapLocation.setText(tempForLocation.substring(tempForLocation.indexOf("?q=")+3));
@@ -66,6 +74,8 @@ public class HouseIntroduceActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     private void preInit() {
         //设置播放时间间隔
@@ -87,6 +97,7 @@ public class HouseIntroduceActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_houst_introduce, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -95,9 +106,27 @@ public class HouseIntroduceActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:// 点击返回图标事件
                 this.finish();
-            default:
-                return super.onOptionsItemSelected(item);
+                break;
+            case R.id.menu_collect:
+                if(isCollect) {
+                    item.setIcon(R.mipmap.menu_collect_2);
+                    isCollect = true;
+                }else {
+                    item.setIcon(R.mipmap.menu_collect);
+                    isCollect = false;
+                }
+                break;
+            case R.id.menu_share:
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "This is my Share text.");
+                shareIntent.setType("text/plain");
+
+                //设置分享列表的标题，并且每次都显示分享列表
+                startActivity(Intent.createChooser(shareIntent, "分享到"));
+                break;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     private class TestNormalAdapter extends StaticPagerAdapter {

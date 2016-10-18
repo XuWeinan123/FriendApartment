@@ -10,4 +10,6 @@
     <string name="setting_switch">切换模式</string>
     <string name="setting_setting">设置</string>
     <string name="setting_turnoff">退出</string>
+    <string name="menu_collect">收藏</string>
+    <string name="menu_share">分享</string>
 </resources>

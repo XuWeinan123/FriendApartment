@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_collect"
+        android:title="@string/menu_collect"
+        android:icon="@mipmap/menu_collect"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/menu_share"
+        android:title="@string/menu_share"
+        android:icon="@mipmap/menu_share"
+        app:showAsAction="always"
+        />
+</menu>
