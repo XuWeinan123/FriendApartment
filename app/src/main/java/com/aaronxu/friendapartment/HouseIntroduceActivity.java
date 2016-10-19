@@ -22,6 +22,8 @@ import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.StaticPagerAdapter;
 import com.jude.rollviewpager.hintview.IconHintView;
 
+import cn.bmob.v3.BmobUser;
+
 public class HouseIntroduceActivity extends AppCompatActivity {
 
     private static final String TAG = "HouseIntroduceActivity";
