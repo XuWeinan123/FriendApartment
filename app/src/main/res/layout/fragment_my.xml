@@ -12,8 +12,7 @@
         android:orientation="vertical"
 
         android:paddingBottom="20dp"
-        android:clipToPadding="false"
-        >
+        android:clipToPadding="false">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -65,12 +64,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:gravity="center_vertical"
+                android:background="@drawable/button_normal"
+                android:clickable="true"
+                android:focusable="true"
                 >
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/setting_myself"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:contentDescription="@string/setting_myself"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -83,12 +86,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:gravity="center_vertical"
+                android:background="@drawable/button_normal"
+                android:clickable="true"
+                android:focusable="true"
                 >
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/setting_message"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:contentDescription="@string/setting_message"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -101,12 +108,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:gravity="center_vertical"
+                android:background="@drawable/button_normal"
+                android:clickable="true"
+                android:focusable="true"
                 >
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/setting_collect"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:contentDescription="@string/setting_collect"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -119,12 +130,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:gravity="center_vertical"
+                android:background="@drawable/button_normal"
+                android:clickable="true"
+                android:focusable="true"
                 >
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/setting_history"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:contentDescription="@string/setting_history"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -147,12 +162,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:gravity="center_vertical"
+                android:background="@drawable/button_normal"
+                android:clickable="true"
+                android:focusable="true"
                 >
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/setting_invive"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:contentDescription="@string/setting_invive"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -165,12 +184,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:gravity="center_vertical"
+                android:background="@drawable/button_normal"
+                android:clickable="true"
+                android:focusable="true"
                 >
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/setting_switch"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:contentDescription="@string/setting_switch"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -183,12 +206,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:gravity="center_vertical"
+                android:background="@drawable/button_normal"
+                android:clickable="true"
+                android:focusable="true"
                 >
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/setting_setting"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:contentDescription="@string/setting_setting"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -201,12 +228,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:gravity="center_vertical"
+                android:background="@drawable/button_normal"
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/setting_turnoff"
                 >
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/setting_turnoff"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:contentDescription="@string/setting_turnoff"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -217,6 +249,4 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
-
 </ScrollView>

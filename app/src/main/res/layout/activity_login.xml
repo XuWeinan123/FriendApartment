@@ -1,84 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.aaronxu.friendapartment.LoginActivity">
+    tools:context="com.aaronxu.friendapartment.LoginActivity"
+    android:background="#ffffff">
 
-    <EditText
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="请输入用户名"
-        android:ems="10"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="57dp"
+        android:src="@mipmap/login_logo"
         android:layout_centerHorizontal="true"
-        android:id="@+id/editText_name" />
+        android:id="@+id/login_logo"/>
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="327dp"
+        android:layout_below="@+id/login_logo"
+        android:layout_marginTop="44dp"
+        android:scrollbars="none"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingStart="61dp"
+            android:paddingEnd="61dp">
+            <include layout="@layout/activity_login_login" />
+            <include layout="@layout/activity_login_register"/>
+        </LinearLayout>
+    </HorizontalScrollView>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:hint="请输入密码"
-        android:ems="10"
-        android:layout_below="@+id/editText_name"
-        android:layout_alignEnd="@+id/editText_name"
-        android:layout_marginTop="22dp"
-        android:id="@+id/editText_password" />
-
-    <Button
-        android:text="登录"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText_password"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="19dp"
-        android:id="@+id/login_button" />
-
-
-    <EditText
-        android:layout_width="216dp"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:hint="输入注册邮箱"
-        android:id="@+id/editText_register_mail"
-        android:layout_below="@id/login_button"
-        android:layout_centerHorizontal="true"
-        android:layout_alignStart="@+id/editText_password"
-        />
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="注册用户名"
-        android:ems="10"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/editText_register_name"
-        android:layout_marginTop="16dp"
-        android:layout_below="@+id/editText_register_mail"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:hint="请输入密码"
-        android:ems="10"
-        android:layout_below="@+id/editText_register_name"
-        android:layout_alignEnd="@+id/editText_register_name"
-        android:layout_marginTop="22dp"
-        android:id="@+id/editText_register_password" />
-
-    <Button
-        android:text="一键注册登录"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText_register_password"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="19dp"
-        android:id="@+id/register_button" />
 </RelativeLayout>
