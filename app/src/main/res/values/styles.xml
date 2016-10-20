@@ -13,5 +13,6 @@
     <style name="common_dialog_style" parent="@style/Animation.AppCompat.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
 </resources>

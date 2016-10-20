@@ -15,6 +15,10 @@ import android.widget.Toast;
 
 import com.aaronxu.friendapartment.QuitDialog;
 import com.aaronxu.friendapartment.R;
+import com.aaronxu.friendapartment.bean.MyUser;
+
+import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobUser;
 
 /**
  * Created by AaronXu on 2016-10-14.
@@ -25,6 +29,8 @@ public class MyFragment extends Fragment {
     private View rootView;
     private LinearLayout mTurnOff;
     private QuitDialog mDialog;
+    private TextView mNameMy;
+    private MyUser myUser;
 
     public MyFragment(){
     }
@@ -43,6 +49,8 @@ public class MyFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mDialog = new QuitDialog(mContext);
         mDialog.setCancelable(true);
+
+        myUser = BmobUser.getCurrentUser(MyUser.class);
     }
 
     @Nullable
@@ -50,12 +58,15 @@ public class MyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_my,container,false);
         mTurnOff = (LinearLayout) rootView.findViewById(R.id.setting_turnoff);
+        mNameMy = (TextView) rootView.findViewById(R.id.name_my);
+
         mTurnOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mDialog.show();
             }
         });
+        mNameMy.setText(myUser.getUsername());
         return rootView;
     }
 }

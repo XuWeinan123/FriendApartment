@@ -1,5 +1,7 @@
 package com.aaronxu.friendapartment.bean;
 
+import java.util.List;
+
 import cn.bmob.v3.BmobUser;
 
 /**
@@ -7,10 +9,11 @@ import cn.bmob.v3.BmobUser;
  */
 
 public class MyUser extends BmobUser {
+    //用户名、邮箱、密码、手机号父类已经自带
     private Boolean sex;
     private int age;
-    private String name;
-    private String phoneNumber;
+    private List<String> personLabel;
+    private List<String> houseLabel;
 
     public Boolean getSex() {
         return sex;
@@ -28,19 +31,4 @@ public class MyUser extends BmobUser {
         this.age = age;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 }
