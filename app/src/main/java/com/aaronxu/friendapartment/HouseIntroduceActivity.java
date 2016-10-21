@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aaronxu.friendapartment.bean.CardBean;
+import com.aaronxu.friendapartment.bean.MyUser;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.StaticPagerAdapter;
 import com.jude.rollviewpager.hintview.IconHintView;
@@ -47,7 +48,6 @@ public class HouseIntroduceActivity extends AppCompatActivity {
         Bundle bundle = intentFromFragment.getExtras();
         cardBeanFromFindFragment = bundle.getParcelable("item");
         //设置标题
-        ActionBar mActionBar = getSupportActionBar();
         mActionBar.setTitle(cardBeanFromFindFragment.getmName());
         mActionBar.setDisplayHomeAsUpEnabled(true);
 
