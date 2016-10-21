@@ -50,7 +50,6 @@ public class MyFragment extends Fragment {
         mDialog = new QuitDialog(mContext);
         mDialog.setCancelable(true);
 
-        myUser = BmobUser.getCurrentUser(MyUser.class);
     }
 
     @Nullable
@@ -60,12 +59,15 @@ public class MyFragment extends Fragment {
         mTurnOff = (LinearLayout) rootView.findViewById(R.id.setting_turnoff);
         mNameMy = (TextView) rootView.findViewById(R.id.name_my);
 
+        myUser = BmobUser.getCurrentUser(MyUser.class);
+
         mTurnOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mDialog.show();
             }
         });
+        Log.d(TAG, "当前的Username是"+myUser.getUsername());
         mNameMy.setText(myUser.getUsername());
         return rootView;
     }

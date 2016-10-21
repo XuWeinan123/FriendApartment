@@ -97,7 +97,7 @@ public class LoginActivity extends Activity {
                         if (myUser != null) {
                             Toast.makeText(LoginActivity.this, "注册成功",Toast.LENGTH_SHORT).show();
                         }else{
-                            Toast.makeText(LoginActivity.this, "myUser为空，注册失败",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, e.getErrorCode()+"注册失败",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

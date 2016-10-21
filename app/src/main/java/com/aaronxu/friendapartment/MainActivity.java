@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
     private NoScrollViewPager mViewPager;
     private List<Fragment> fragmentList;
-    private List<String> titleList;
     private ViewPagerIndicator mIndicator;
     private ActionBar mActionBar;
 
@@ -128,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         MenuItem search = menu.findItem(R.id.menu_locate2);
-        SearchView searchView = (SearchView) search.getActionView();
         Log.d(TAG, "onCreateOptionsMenu: ");
 
         MenuItemCompat.setOnActionExpandListener(search, new MenuItemCompat.OnActionExpandListener() {
