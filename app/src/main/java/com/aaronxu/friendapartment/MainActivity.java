@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mActionBar = getSupportActionBar();
+        assert mActionBar != null;
         mActionBar.setTitle("首页");
 
         mViewPager = (NoScrollViewPager) findViewById(R.id.view_pager);
