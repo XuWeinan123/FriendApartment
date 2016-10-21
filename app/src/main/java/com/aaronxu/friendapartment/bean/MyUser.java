@@ -11,18 +11,26 @@ import cn.bmob.v3.BmobUser;
 public class MyUser extends BmobUser {
     //用户名、邮箱、密码、手机号父类已经自带
     private Boolean sex;
-    private int age;
+    private Integer age;
     private List<String> personLabel;
     private List<String> houseLabel;
     private List<String> roommateLabel;
-    private boolean isGroup;
+    private Boolean isGroup;
     private String rentLocation;
     private String company;
-    private int statusCode;
+    private Integer statusCode;
 
     public MyUser() {
+        this.sex = true;
+        this.age = 100;
+        this.isGroup = true;
+        this.rentLocation = "默认地点";
+        this.company = "默认公司";
+        this.statusCode = 0;
+
     }
     public MyUser(String username,String password,String mail){
+        this();
         this.setUsername(username);
         this.setPassword(password);
         this.setEmail(mail);
@@ -52,7 +60,7 @@ public class MyUser extends BmobUser {
         this.roommateLabel = roommateLabel;
     }
 
-    public boolean isGroup() {
+    public Boolean isGroup() {
         return isGroup;
     }
 
@@ -76,7 +84,7 @@ public class MyUser extends BmobUser {
         this.company = company;
     }
 
-    public int getStatusCode() {
+    public Integer getStatusCode() {
         return statusCode;
     }
 
@@ -92,7 +100,7 @@ public class MyUser extends BmobUser {
         this.sex = sex;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 

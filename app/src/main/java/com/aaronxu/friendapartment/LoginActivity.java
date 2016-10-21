@@ -35,7 +35,7 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Bmob.initialize(this,"a0386af55dcdc5367aa94407ebd3d9f7");
+        Bmob.initialize(this,"656578d0db5ae6611b73a97705efb329");
 
         dialog = new ProgressDialog(LoginActivity.this);
         dialog.setTitle("加载中……");
@@ -96,12 +96,16 @@ public class LoginActivity extends Activity {
                     public void done(MyUser myUser, BmobException e) {
                         if (myUser != null) {
                             Toast.makeText(LoginActivity.this, "注册成功",Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(LoginActivity.this,MainActivity.class);
+                            i.putExtra("Username",myBmobUser.getUsername());
+                            startActivity(i);
+                            finish();
                         }else{
                             Toast.makeText(LoginActivity.this, e.getErrorCode()+"注册失败",Toast.LENGTH_SHORT).show();
                         }
+                        dialog.dismiss();
                     }
                 });
-                dialog.dismiss();
             }
         });
     }

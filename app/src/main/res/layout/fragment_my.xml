@@ -10,15 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-
         android:paddingBottom="20dp"
         android:clipToPadding="false">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:background="@color/totalWhite"
             android:elevation="1dp"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:id="@+id/setting_person_center"
+            android:background="@drawable/button_normal"
+            android:clickable="true"
+            android:focusable="true">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -35,7 +37,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="雷勋陶"
+                    android:text="默认用户名"
                     android:textColor="@color/textRegularBlack"
                     android:textSize="16sp"
 
@@ -48,40 +50,19 @@
                     android:textColor="@color/textLittleBlack"
                     android:layout_marginStart="8dp"
                     android:textSize="12sp"
+                    android:id="@+id/status_my"
                     />
             </LinearLayout>
 
         </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="192dp"
+            android:layout_height="wrap_content"
             android:background="@color/totalWhite"
             android:elevation="1dp"
             android:layout_marginTop="16dp"
             android:orientation="vertical"
             >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:gravity="center_vertical"
-                android:background="@drawable/button_normal"
-                android:clickable="true"
-                android:focusable="true"
-                >
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/setting_myself"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:contentDescription="@string/setting_myself"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/setting_myself"
-                    android:textSize="14sp"
-                    android:textColor="@color/textRegularBlack"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"/>
-            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="48dp"

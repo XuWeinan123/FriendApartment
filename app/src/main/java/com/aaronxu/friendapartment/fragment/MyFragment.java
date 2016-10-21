@@ -2,6 +2,7 @@ package com.aaronxu.friendapartment.fragment;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,12 +11,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aaronxu.friendapartment.PersonCenterActivity;
 import com.aaronxu.friendapartment.QuitDialog;
 import com.aaronxu.friendapartment.R;
 import com.aaronxu.friendapartment.bean.MyUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobUser;
@@ -30,7 +36,11 @@ public class MyFragment extends Fragment {
     private LinearLayout mTurnOff;
     private QuitDialog mDialog;
     private TextView mNameMy;
+    private TextView mStatusMy;
     private MyUser myUser;
+    private RelativeLayout mPersonCenter;
+
+    private List<String> statusList;
 
     public MyFragment(){
     }
@@ -50,17 +60,30 @@ public class MyFragment extends Fragment {
         mDialog = new QuitDialog(mContext);
         mDialog.setCancelable(true);
 
+        statusList = new ArrayList<>();
+        statusList.add("找房中");
+        statusList.add("找室友");
+        statusList.add("已找到");
+
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_my,container,false);
+        mPersonCenter = (RelativeLayout) rootView.findViewById(R.id.setting_person_center);
         mTurnOff = (LinearLayout) rootView.findViewById(R.id.setting_turnoff);
         mNameMy = (TextView) rootView.findViewById(R.id.name_my);
+        mStatusMy = (TextView) rootView.findViewById(R.id.status_my);
 
         myUser = BmobUser.getCurrentUser(MyUser.class);
 
+        mPersonCenter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mContext, PersonCenterActivity.class));
+            }
+        });
         mTurnOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +92,10 @@ public class MyFragment extends Fragment {
         });
         Log.d(TAG, "当前的Username是"+myUser.getUsername());
         mNameMy.setText(myUser.getUsername());
+
+        String tempStatus = statusList.get(myUser.getStatusCode());
+        mStatusMy.setText(tempStatus);
+
         return rootView;
     }
 }
