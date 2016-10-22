@@ -26,6 +26,8 @@ import java.util.List;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobUser;
 
+import static com.aaronxu.friendapartment.PersonCenterActivity.RESULT_OK;
+
 /**
  * Created by AaronXu on 2016-10-14.
  */
@@ -77,14 +79,10 @@ public class MyFragment extends Fragment {
         mTurnOff = (LinearLayout) rootView.findViewById(R.id.setting_turnoff);
         mNameMy = (TextView) rootView.findViewById(R.id.name_my);
         mStatusMy = (TextView) rootView.findViewById(R.id.status_my);
-
-
-
         mPersonCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mContext, PersonCenterActivity.class));
-                getActivity().finish();
+                startActivityForResult(new Intent(mContext, PersonCenterActivity.class),0);
             }
         });
         mTurnOff.setOnClickListener(new View.OnClickListener() {
@@ -100,5 +98,17 @@ public class MyFragment extends Fragment {
         mStatusMy.setText(tempStatus);
 
         return rootView;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d(TAG, "返回结果"+requestCode+"\n"+resultCode);
+        switch (resultCode){
+            case PersonCenterActivity.RESULT_OK :
+                Log.d(TAG, "返回结果成功");
+                myUser = BmobUser.getCurrentUser(MyUser.class);
+                mNameMy.setText(myUser.getUsername());
+                mStatusMy.setText(statusList.get(myUser.getStatusCode()));
+        }
     }
 }

@@ -2,7 +2,7 @@ package com.aaronxu.friendapartment;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.support.annotation.IdRes;
+import android.opengl.Visibility;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
@@ -45,14 +46,17 @@ public class PersonCenterActivity extends AppCompatActivity implements View.OnCl
     private MyUser myUser;
 
     private boolean isChanged;
+    public static final int RESULT_OK = 76;
 
     private List<String> statusList;
     private ProgressDialog progressDialog;
     private MyUser tempUser;
     private AlertDialog.Builder saveDialog;
-    private AlertDialog.Builder mNameAlertDialogBulider;
     private EditText mNameDialogEditText;
     private AlertDialog mNameAlertDialog;
+    private String beforeChange;
+    private EditText mMailDialogEditText;
+    private AlertDialog mMailAlertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +75,7 @@ public class PersonCenterActivity extends AppCompatActivity implements View.OnCl
         tempUser = new MyUser();
         myUser = BmobUser.getCurrentUser(MyUser.class);
 
-        findId();
+        findIdAndSetListen();
         initInformation();
         initDialog();
     }
@@ -80,6 +84,7 @@ public class PersonCenterActivity extends AppCompatActivity implements View.OnCl
         //初始化Loading对话框
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
+        progressDialog.setMessage("正在忙碌，请坐和放宽");
         //初始化保存Dialog
         saveDialog = new AlertDialog.Builder(PersonCenterActivity.this);
         saveDialog.setMessage("保存修改?");
@@ -92,16 +97,18 @@ public class PersonCenterActivity extends AppCompatActivity implements View.OnCl
                     public void done(BmobException e) {
                         if (e==null){
                             showToast("信息更新成功");
+                            setResult(RESULT_OK);
+                            finish();
                         }else {
                             showToast("信息更新失败\n"+e);
                         }
-                        finish();
                         progressDialog.dismiss();
                     }
                 });
             }
         });
         saveDialog.setNegativeButton("取消",null);
+        //初始化修改的Dialog
         initAlertDialog();
     }
 
@@ -118,13 +125,17 @@ public class PersonCenterActivity extends AppCompatActivity implements View.OnCl
                 this.finish();
                 break;
             case R.id.save_change:
-                saveDialog.show();
+                if (isChanged){
+                    saveDialog.show();
+                }else {
+                    showToast("未更改");
+                }
 
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void findId() {
+    private void findIdAndSetListen() {
         mName = (RelativeLayout) findViewById(R.id.person_center_name);
         mNameText = (TextView) findViewById(R.id.person_center_name_text);
         mMail = (RelativeLayout) findViewById(R.id.person_center_mail);
@@ -144,19 +155,31 @@ public class PersonCenterActivity extends AppCompatActivity implements View.OnCl
         mIsGroup.setOnClickListener(this);
         mMapLocation.setOnClickListener(this);
         mCompany.setOnClickListener(this);
+
+        mIsGroupSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (!isChanged) isChanged = true;
+                tempUser.setGroup(isChecked);
+            }
+        });
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.person_center_name:
+                beforeChange = String.valueOf(mNameText.getText());
+                mNameDialogEditText.setText(beforeChange);
                 mNameAlertDialog.show();
                 break;
             case R.id.person_center_mail:
-                createAlertDialog("修改邮箱",R.id.person_center_mail_text);
+                beforeChange = String.valueOf(mMailText.getText());
+                mMailDialogEditText.setText(beforeChange);
+                mMailAlertDialog.show();
                 break;
             case R.id.person_center_status:
-                showToast("person_center_status");
+                showToast("用户状态为："+mStatusText.getText());
                 break;
             case R.id.person_center_isGroup:
                 mIsGroupSwitch.setChecked(!mIsGroupSwitch.isChecked());
@@ -177,59 +200,54 @@ public class PersonCenterActivity extends AppCompatActivity implements View.OnCl
         mCompanyText.setText(myUser.getCompany());
         String tempStatus = statusList.get(myUser.getStatusCode());
         mStatusText.setText(tempStatus);
+        mIsGroupSwitch.setChecked(myUser.isGroup());
     }
 
-    private void createAlertDialog(String title, @IdRes final int id) {
-        final int tempId = id;
-        final String beforeChange = String.valueOf(((TextView)findViewById(tempId)).getText());
-        final View temp = LayoutInflater.from(this).inflate(R.layout.layout_for_dialog,null);
-        final EditText mEditText = (EditText) temp.findViewById(R.id.editText_in_dialog);
-        final AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(this).setTitle(title);
-        mAlertDialog.setView(temp);
-        mAlertDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (beforeChange.equals(mEditText.getText())){
-                    return;
-                }else {
-                    ((TextView)findViewById(tempId)).setText(mEditText.getText());
-                    switch (id){
-                        case R.id.person_center_name_text:
-                            //mNameAlertDialog.show();
-                            Log.d(TAG, "更改了用户名");
-                            break;
-                        case R.id.person_center_mail_text:
-                            tempUser.setEmail(String.valueOf(mEditText.getText()));
-                            Log.d(TAG, "更改了邮箱");
-                            break;
-                    }
-                    isChanged = true;
-                }
-            }
-        });
-        mAlertDialog.show();
-    }
     public void initAlertDialog(){
         //以下是出初始化了修改用户名称的dialog
-        final String beforeChange = String.valueOf(mNameText.getText());
-        View dialog = LayoutInflater.from(this).inflate(R.layout.layout_for_dialog,null);
+        View dialog = LayoutInflater.from(this).inflate(R.layout.layout_for_dialog_name,null);
         mNameDialogEditText = (EditText) dialog.findViewById(R.id.editText_in_dialog);
-        mNameDialogEditText.setText(beforeChange);
-        mNameAlertDialogBulider = new AlertDialog.Builder(this);
-        mNameAlertDialogBulider.setView(dialog);
-        mNameAlertDialogBulider.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        AlertDialog.Builder mNameAlertDialogBuilder;
+        mNameAlertDialogBuilder = new AlertDialog.Builder(this);
+        mNameAlertDialogBuilder.setView(dialog);
+        mNameAlertDialogBuilder.setTitle("修改用户名");
+        mNameAlertDialogBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Log.d(TAG, "修改前用户名："+beforeChange+"\t修改后用户名："+mNameDialogEditText.getText()+"\n他们是否一致？"+beforeChange.equals(mNameDialogEditText.getText().toString()));
+                Log.d(TAG, "修改前用户名："+ beforeChange +"\t修改后用户名："+mNameDialogEditText.getText()+"\n他们是否一致？"+ beforeChange.equals(mNameDialogEditText.getText().toString()));
                 if (beforeChange.equals(mNameDialogEditText.getText().toString())){
                     Log.d(TAG, "用户名一致，无需修改");
                 }else{
                     mNameText.setText(mNameDialogEditText.getText());
-                    isChanged = true;
+                    if (!isChanged) isChanged = true;
+                    //把更新信息先放大tempUser中
+                    tempUser.setUsername(String.valueOf(mNameDialogEditText.getText()));
                 }
             }
         });
-        mNameAlertDialog = mNameAlertDialogBulider.create();
+        mNameAlertDialog = mNameAlertDialogBuilder.create();
+
+        //以下是初始化了修改用户邮箱的dialog
+        View dialogMail = LayoutInflater.from(this).inflate(R.layout.layout_for_dialog_mail,null);
+        mMailDialogEditText = (EditText) dialogMail.findViewById(R.id.editText_in_dialog);
+        AlertDialog.Builder mMailAlertDialogBuilder;
+        mMailAlertDialogBuilder = new AlertDialog.Builder(this);
+        mMailAlertDialogBuilder.setView(dialogMail);
+        mMailAlertDialogBuilder.setTitle("修改邮箱");
+        mMailAlertDialogBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (beforeChange.equals(mMailDialogEditText.getText().toString())){
+                    Log.d(TAG, "邮箱一致，无需修改");
+                }else{
+                    mMailText.setText(mMailDialogEditText.getText());
+                    if (!isChanged) isChanged = true;
+                    //把更新信息先放大tempUser中
+                    tempUser.setEmail(String.valueOf(mMailDialogEditText.getText()));
+                }
+            }
+        });
+        mMailAlertDialog = mMailAlertDialogBuilder.create();
     }
     public void showToast(String str){
         Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
