@@ -65,6 +65,8 @@ public class MyFragment extends Fragment {
         statusList.add("找室友");
         statusList.add("已找到");
 
+        myUser = BmobUser.getCurrentUser(MyUser.class);
+
     }
 
     @Nullable
@@ -76,12 +78,13 @@ public class MyFragment extends Fragment {
         mNameMy = (TextView) rootView.findViewById(R.id.name_my);
         mStatusMy = (TextView) rootView.findViewById(R.id.status_my);
 
-        myUser = BmobUser.getCurrentUser(MyUser.class);
+
 
         mPersonCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(mContext, PersonCenterActivity.class));
+                getActivity().finish();
             }
         });
         mTurnOff.setOnClickListener(new View.OnClickListener() {

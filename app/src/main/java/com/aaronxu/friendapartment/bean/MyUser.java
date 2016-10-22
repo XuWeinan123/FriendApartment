@@ -1,5 +1,7 @@
 package com.aaronxu.friendapartment.bean;
 
+import android.text.Editable;
+
 import java.util.List;
 
 import cn.bmob.v3.BmobUser;
@@ -107,5 +109,6 @@ public class MyUser extends BmobUser {
     public void setAge(int age) {
         this.age = age;
     }
+
 
 }
