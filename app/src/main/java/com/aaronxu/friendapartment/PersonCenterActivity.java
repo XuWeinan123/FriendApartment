@@ -66,7 +66,6 @@ public class PersonCenterActivity extends AppCompatActivity implements View.OnCl
         mActionBar.setTitle("个人中心");
         mActionBar.setDisplayHomeAsUpEnabled(true);
 
-
         statusList = new ArrayList<>();
         statusList.add("找房中");
         statusList.add("找室友");

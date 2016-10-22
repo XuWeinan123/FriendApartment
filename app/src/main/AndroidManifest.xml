@@ -41,7 +41,7 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="Bmob_APP_KEY"
-            android:value="a0386af55dcdc5367aa94407ebd3d9f7" />
+            android:value="ba335e23275c9258642073decc06070b" />
         <meta-data android:name="com.amap.api.v2.apikey" android:value="ba335e23275c9258642073decc06070b">
         </meta-data>
         <activity

@@ -1,13 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_location"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.aaronxu.friendapartment.LocationActivity">
+    android:orientation="vertical"
+    tools:context="com.aaronxu.friendapartment.LocationActivity"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
-</RelativeLayout>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:hint="搜索"
+        android:textColorHint="@color/textLittleBlack"
+        android:background="@drawable/searchbar_location"
+        android:textSize="14sp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:elevation="2dp"
+        android:id="@+id/location_activity_searcher"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/location_activity_button">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/location_activity_gps_icon"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/location_activity_gps_text"
+            android:layout_marginRight="8dp"
+            android:id="@+id/location_activity_icon"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="默认定位"
+            android:textColor="@color/textRegularBlack"
+            android:layout_centerInParent="true"
+            android:id="@+id/location_activity_gps_text"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="23dp"
+        android:background="#f4f4f4"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="@color/textLittleBlack"
+            android:text="热门城市"
+            android:layout_marginStart="16dp"/>
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/location_activity_listView"/>
+</LinearLayout>
