@@ -1,5 +1,7 @@
 package com.aaronxu.friendapartment;
 
+import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,13 +38,21 @@ public class LocationActivity extends AppCompatActivity {
     private EditText locationSearcher;
     private ListView locationListView;
     private String[] locationBestCitys;
+    private Intent intent;
+    private Intent intentReturn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
-        getSupportActionBar().setElevation(0);
+        ActionBar mActionBar = getSupportActionBar();
+        mActionBar.setTitle("定位");
+        mActionBar.setDisplayHomeAsUpEnabled(true);
+        mActionBar.setElevation(0);
 
+        //获得传递过来的参数以及初始化等会要返回的参数
+        intent = getIntent();
+        intentReturn = new Intent();
         //初始化定位所需要的参数
         initLocationClient();
         //初始化findId
@@ -73,10 +83,13 @@ public class LocationActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d(TAG, "parent:"+parent+"\nview:"+view+"\nposition:"+position+"\nid"+id);
                 locationGpsText.setText(locationBestCitys[position]);
+                intentReturn.putExtra("locationReturn",locationBestCitys[position]);
+                setResult(PersonCenterActivity.RESULT_OK,intentReturn);
             }
         });
 
-        locationGpsButton.callOnClick();
+        //
+        locationGpsText.setText(intent.getStringExtra("location"));
     }
 
     private void initCityList() {
@@ -87,6 +100,7 @@ public class LocationActivity extends AppCompatActivity {
                 "厦门","长沙","成都","重庆","太原",
         };
     }
+
     private void initFindId() {
         locationGpsText = (TextView) findViewById(R.id.location_activity_gps_text);
         locationIcon = (ImageView) findViewById(R.id.location_activity_icon);
@@ -105,6 +119,8 @@ public class LocationActivity extends AppCompatActivity {
                     if (aMapLocation.getErrorCode() == 0) {
                         //可在其中解析amapLocation获取相应内容。
                         locationGpsText.setText(aMapLocation.getCountry()+aMapLocation.getProvince()+aMapLocation.getCity()+aMapLocation.getDistrict()+aMapLocation.getStreet());
+                        intentReturn.putExtra("locationReturn",locationGpsText.getText().toString());
+                        setResult(PersonCenterActivity.RESULT_OK,intentReturn);
                     }else {
                         //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
                         Log.d(TAG,"location Error, ErrCode:"

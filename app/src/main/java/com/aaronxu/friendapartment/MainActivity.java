@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.aaronxu.friendapartment.bean.MyUser;
 import com.aaronxu.friendapartment.fragment.FindFragment;
 import com.aaronxu.friendapartment.fragment.MainFragment;
 import com.aaronxu.friendapartment.fragment.MyFragment;
@@ -26,6 +27,8 @@ import com.aaronxu.friendapartment.view.ViewPagerIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.bmob.v3.BmobUser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -156,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_locate:
-                startActivity(new Intent(MainActivity.this,LocationActivity.class));
+                startActivity(new Intent(MainActivity.this,LocationActivity.class).putExtra("location", BmobUser.getCurrentUser(MyUser.class).getRentLocation()));
                 break;
         }
         return true;

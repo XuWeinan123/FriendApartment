@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#2ebce4</color>
     <color name="colorPrimaryDark">#2596b6</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#FF5722</color>
     <color name="orginGrayColor">#e0e0e0</color>
     <color name="cardViewName">#2b2b2b</color>
     <color name="cardViewPercent">#bdbdbd</color>
