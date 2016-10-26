@@ -80,7 +80,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:paddingStart="24dp"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:id="@+id/item_master_name_button">
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
@@ -31,6 +32,9 @@ import com.aaronxu.friendapartment.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
+import cn.bingoogolapple.refreshlayout.BGAStickinessRefreshViewHolder;
+
 /**
  * Created by AaronXu on 2016-10-14.
  */
@@ -38,6 +42,7 @@ public class FindFragment extends Fragment{
     private static final String TAG = "FindFragment";
     private Context mContext;
     private View rootView;
+    private BGARefreshLayout mRefreshLayout;
     private ListView houseListView;
     private List<CardBean> mList;
     private LinearLayout filter;
@@ -63,6 +68,45 @@ public class FindFragment extends Fragment{
         initAnimation();
 
         super.onCreate(savedInstanceState);
+    }
+
+    private void initBGA() {
+        // 为BGARefreshLayout设置代理
+        mRefreshLayout.setDelegate(new BGARefreshLayout.BGARefreshLayoutDelegate() {
+            @Override
+            public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(Void... params) {
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void aVoid) {
+                        // 加载完毕后在UI线程结束下拉刷新
+                        mRefreshLayout.endRefreshing();
+                    }
+                }.execute();
+            }
+
+            @Override
+            public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
+                Toast.makeText(mContext,"没有更多的数据了",Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+        // 设置下拉刷新和上拉加载更多的风格     参数1：应用程序上下文，参数2：是否具有上拉加载更多功能
+        BGAStickinessRefreshViewHolder refreshViewHolder = new BGAStickinessRefreshViewHolder(mContext, true);
+        refreshViewHolder.setRotateImage(R.mipmap.refresh);
+        refreshViewHolder.setStickinessColor(R.color.colorPrimary);
+        // 设置下拉刷新和上拉加载更多的风格
+        mRefreshLayout.setRefreshViewHolder(refreshViewHolder);
+
     }
 
     private void initmList() {
@@ -94,9 +138,11 @@ public class FindFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_find,container,false);
+        mRefreshLayout = (BGARefreshLayout) rootView.findViewById(R.id.bga_refresh);
         houseListView = (ListView) rootView.findViewById(R.id.houseListView);
         filter = (LinearLayout) rootView.findViewById(R.id.linearLayout);
         isFilter = false;
+        initBGA();
         houseListView.setAdapter(new HouseAdapter(mList,getContext()));
         return rootView;
     }

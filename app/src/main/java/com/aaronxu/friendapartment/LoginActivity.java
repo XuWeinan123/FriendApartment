@@ -101,7 +101,7 @@ public class LoginActivity extends Activity {
                             startActivity(i);
                             finish();
                         }else{
-                            Toast.makeText(LoginActivity.this, e.getErrorCode()+"注册失败",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, e.toString()+"注册失败",Toast.LENGTH_SHORT).show();
                         }
                         dialog.dismiss();
                     }

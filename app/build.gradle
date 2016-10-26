@@ -8,8 +8,8 @@ android {
         applicationId "com.aaronxu.friendapartment"
         minSdkVersion 21
         targetSdkVersion 24
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "0.3"
     }
     buildTypes {
         release {
@@ -33,4 +33,9 @@ dependencies {
     //如果你想应用能够兼容Android6.0，请添加此依赖(org.apache.http.legacy.jar)
     compile 'cn.bmob.android:http-legacy:1.0'
     compile files('libs/AMap_Location_V3.0.0_20160922.jar')
+
+    compile 'com.android.support:recyclerview-v7:24.2.1'
+    // 记得添加nineoldandroids
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'cn.bingoogolapple:bga-refreshlayout:1.1.6@aar'
 }

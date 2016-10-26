@@ -60,11 +60,17 @@
         </LinearLayout>
     </LinearLayout>
 
-    <ListView
-        android:layout_below="@+id/linearLayout"
+    <cn.bingoogolapple.refreshlayout.BGARefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/houseListView"
-        />
+        android:id="@+id/bga_refresh">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/houseListView"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/linearLayout" />
+    </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
 
 </RelativeLayout>

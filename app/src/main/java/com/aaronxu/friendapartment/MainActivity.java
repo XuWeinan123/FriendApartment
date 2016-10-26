@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.aaronxu.friendapartment.bean.HouseBean;
 import com.aaronxu.friendapartment.bean.MyUser;
 import com.aaronxu.friendapartment.fragment.FindFragment;
 import com.aaronxu.friendapartment.fragment.MainFragment;
@@ -29,6 +30,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SaveListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -59,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         mActionBar.setTitle("首页");
 
         mViewPager = (NoScrollViewPager) findViewById(R.id.view_pager);
-
+        beforeInit();
         initFragment();
         initMainViewPager();
         initBottomBarListener();
@@ -84,6 +87,31 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageScrollStateChanged(int state) {
 
+            }
+        });
+    }
+
+    private void beforeInit() {
+        HouseBean houseBean = new HouseBean();
+        houseBean.setHouseAge(18);
+        houseBean.setHouseCollectNumber(25);
+        List<String> list = new ArrayList<>();
+        list.add("第一");
+        list.add("第二");
+        list.add("第三");
+        list.add("第四");
+        houseBean.setHouseLabel(list);
+        houseBean.setHouseLocation("地点");
+        houseBean.setHouseName("月寒宫");
+        houseBean.setHousePrice(8888);
+        houseBean.setHouseSize(80.0f);
+        houseBean.setMasterName("王子聪");
+        houseBean.setTitleImage("暂无");
+        houseBean.save(new SaveListener<String>() {
+            @Override
+            public void done(String s, BmobException e) {
+                if (e==null)    Toast.makeText(MainActivity.this,"上传成功",Toast.LENGTH_SHORT).show();
+                else    Toast.makeText(MainActivity.this,"上传出现错误"+e,Toast.LENGTH_LONG).show();
             }
         });
     }

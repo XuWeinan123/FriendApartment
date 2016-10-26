@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -91,7 +92,15 @@ public class LocationActivity extends AppCompatActivity {
         //
         locationGpsText.setText(intent.getStringExtra("location"));
     }
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:// 点击返回图标事件
+                this.finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private void initCityList() {
         locationBestCitys = new String[]{
                 "北京","上海","深圳","武汉","广州",

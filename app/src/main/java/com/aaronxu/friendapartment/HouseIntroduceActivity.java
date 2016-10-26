@@ -33,6 +33,7 @@ public class HouseIntroduceActivity extends AppCompatActivity {
     private RollPagerView mRollViewPager;
     private TextView mMasterName;
     private TextView mMapLocation;
+    private LinearLayout mMasterButton;
     private LinearLayout mMapLocationButton;
     private ActionBar mActionBar;
     private boolean isCollect = false;
@@ -54,6 +55,7 @@ public class HouseIntroduceActivity extends AppCompatActivity {
         mRollViewPager = (RollPagerView) findViewById(R.id.roll_view_pager_introduce);
         mMasterName = (TextView) findViewById(R.id.item_master_name);
         mMapLocation = (TextView) findViewById(R.id.item_map_location_text);
+        mMasterButton = (LinearLayout) findViewById(R.id.item_master_name_button);
         mMapLocationButton = (LinearLayout) findViewById(R.id.item_map_location_button);
 
         preInit();
@@ -66,6 +68,12 @@ public class HouseIntroduceActivity extends AppCompatActivity {
         mMasterName.setText("雇主："+cardBeanFromFindFragment.getmMasterName());
         String tempForLocation = cardBeanFromFindFragment.getmMapLocation();
         mMapLocation.setText(tempForLocation.substring(tempForLocation.indexOf("?q=")+3));
+        mMasterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(HouseIntroduceActivity.this,"在等着后台把功能开发出来……",Toast.LENGTH_SHORT).show();
+            }
+        });
         mMapLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
